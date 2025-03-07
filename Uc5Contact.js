@@ -10,15 +10,13 @@ class Contact {
         console.log(`Contact added: ${name}`);
     }
 
-    // Method to find and edit a contact by name
-    editContact(name, newPhone, newEmail, newAddress) {
-        let contact = this.contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase());
+    // Method to find and delete a contact by name
+    deleteContact(name) {
+        let index = this.contacts.findIndex(contact => contact.name.toLowerCase() === name.toLowerCase());
 
-        if (contact) {
-            contact.phone = newPhone || contact.phone;
-            contact.email = newEmail || contact.email;
-            contact.address = newAddress || contact.address;
-            console.log(`Contact updated: ${name}`);
+        if (index !== -1) {
+            let removedContact = this.contacts.splice(index, 1);
+            console.log(`Contact deleted: ${removedContact[0].name}`);
         } else {
             console.log(`Contact not found: ${name}`);
         }
@@ -46,11 +44,11 @@ let myAddressBook = new Contact();
 myAddressBook.addContact("John Doe", "123-456-7890", "john@example.com", "123 Street, NY");
 myAddressBook.addContact("Jane Smith", "987-654-3210", "jane@example.com", "456 Avenue, LA");
 
-// Display contacts before editing
+// Display contacts before deleting
 myAddressBook.displayContacts();
 
-// Editing an existing contact
-myAddressBook.editContact("John Doe", "111-222-3333", "john.doe@newmail.com", "789 Road, SF");
+// Deleting a contact
+myAddressBook.deleteContact("John Doe");
 
-// Display contacts after editing
+// Display contacts after deleting
 myAddressBook.displayContacts();
