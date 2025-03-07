@@ -10,24 +10,26 @@ class Contact {
         console.log(`Contact added: ${name}`);
     }
 
-    // Method to search for contacts by city
-    searchByCity(city) {
-        let results = this.contacts.filter(contact => contact.city.toLowerCase() === city.toLowerCase());
+    // Method to count contacts by City using reduce()
+    countByCity() {
+        let cityCount = this.contacts.reduce((acc, contact) => {
+            acc[contact.city] = (acc[contact.city] || 0) + 1;
+            return acc;
+        }, {});
 
-        console.log(`\nContacts in ${city}:`);
-        results.length > 0
-            ? results.map(contact => console.log(`${contact.name}, ${contact.phone}, ${contact.email}, ${contact.address}`))
-            : console.log("No contacts found in this city.");
+        console.log("\nContact Count by City:");
+        Object.keys(cityCount).map(city => console.log(`City: ${city}, Count: ${cityCount[city]}`));
     }
 
-    // Method to search for contacts by state
-    searchByState(state) {
-        let results = this.contacts.filter(contact => contact.state.toLowerCase() === state.toLowerCase());
+    // Method to count contacts by State using reduce()
+    countByState() {
+        let stateCount = this.contacts.reduce((acc, contact) => {
+            acc[contact.state] = (acc[contact.state] || 0) + 1;
+            return acc;
+        }, {});
 
-        console.log(`\nContacts in ${state}:`);
-        results.length > 0
-            ? results.map(contact => console.log(`${contact.name}, ${contact.phone}, ${contact.email}, ${contact.address}`))
-            : console.log("No contacts found in this state.");
+        console.log("\nContact Count by State:");
+        Object.keys(stateCount).map(state => console.log(`State: ${state}, Count: ${stateCount[state]}`));
     }
 
     // Method to display all contacts
@@ -52,12 +54,14 @@ let myAddressBook = new Contact();
 myAddressBook.addContact("John Doe", "123-456-7890", "john@example.com", "123 Street", "New York", "NY");
 myAddressBook.addContact("Jane Smith", "987-654-3210", "jane@example.com", "456 Avenue", "Los Angeles", "CA");
 myAddressBook.addContact("Mike Johnson", "555-123-4567", "mike@example.com", "789 Road", "New York", "NY");
+myAddressBook.addContact("Sarah Lee", "333-222-1111", "sarah@example.com", "321 Blvd", "Los Angeles", "CA");
+myAddressBook.addContact("Tom Brown", "999-888-7777", "tom@example.com", "654 Lane", "Chicago", "IL");
 
 // Display all contacts
 myAddressBook.displayContacts();
 
-// Search by city
-myAddressBook.searchByCity("New York");
+// Count contacts by City
+myAddressBook.countByCity();
 
-// Search by state
-myAddressBook.searchByState("CA");
+// Count contacts by State
+myAddressBook.countByState();
