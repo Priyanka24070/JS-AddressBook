@@ -10,16 +10,11 @@ class Contact {
         console.log(`Contact added: ${name}`);
     }
 
-    // Method to find and delete a contact by name
-    deleteContact(name) {
-        let index = this.contacts.findIndex(contact => contact.name.toLowerCase() === name.toLowerCase());
-
-        if (index !== -1) {
-            let removedContact = this.contacts.splice(index, 1);
-            console.log(`Contact deleted: ${removedContact[0].name}`);
-        } else {
-            console.log(`Contact not found: ${name}`);
-        }
+    // Method to get the total number of contacts using reduce()
+    getContactCount() {
+        let count = this.contacts.reduce((total) => total + 1, 0);
+        console.log(`Total Contacts: ${count}`);
+        return count;
     }
 
     // Method to display all contacts
@@ -44,11 +39,8 @@ let myAddressBook = new Contact();
 myAddressBook.addContact("John Doe", "123-456-7890", "john@example.com", "123 Street, NY");
 myAddressBook.addContact("Jane Smith", "987-654-3210", "jane@example.com", "456 Avenue, LA");
 
-// Display contacts before deleting
+// Display contacts
 myAddressBook.displayContacts();
 
-// Deleting a contact
-myAddressBook.deleteContact("John Doe");
-
-// Display contacts after deleting
-myAddressBook.displayContacts();
+// Get the total number of contacts
+myAddressBook.getContactCount();
