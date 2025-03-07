@@ -10,6 +10,20 @@ class Contact {
         console.log(`Contact added: ${name}`);
     }
 
+    // Method to find and edit a contact by name
+    editContact(name, newPhone, newEmail, newAddress) {
+        let contact = this.contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase());
+
+        if (contact) {
+            contact.phone = newPhone || contact.phone;
+            contact.email = newEmail || contact.email;
+            contact.address = newAddress || contact.address;
+            console.log(`Contact updated: ${name}`);
+        } else {
+            console.log(`Contact not found: ${name}`);
+        }
+    }
+
     // Method to display all contacts
     displayContacts() {
         console.log("\nAddress Book:");
@@ -32,5 +46,11 @@ let myAddressBook = new Contact();
 myAddressBook.addContact("John Doe", "123-456-7890", "john@example.com", "123 Street, NY");
 myAddressBook.addContact("Jane Smith", "987-654-3210", "jane@example.com", "456 Avenue, LA");
 
-// Displaying all contacts
+// Display contacts before editing
+myAddressBook.displayContacts();
+
+// Editing an existing contact
+myAddressBook.editContact("John Doe", "111-222-3333", "john.doe@newmail.com", "789 Road, SF");
+
+// Display contacts after editing
 myAddressBook.displayContacts();
